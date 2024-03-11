@@ -1,0 +1,24 @@
+.header {
+padding: 20px 0;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.inputSearch {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: inherit;
+    max-width: 300px;
+    width: 100%;
+}
+
+.formBtn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: inherit;
+}

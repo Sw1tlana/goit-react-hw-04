@@ -34,3 +34,33 @@ img {
   display: block;
   max-width: 100%;
 }
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+html {
+  background-color: #d8effa;
+  background: linear-gradient(#91c3dc, #94bfed);
+}
+
+body:after {
+  content: '';
+  height: 100%;
+  width: 100%;
+  display: block;
+  background-image: linear-gradient(90deg, rgba(255, 255, 255, .25) 2px, rgba(0, 0, 0, 0) 2px), linear-gradient(0deg, rgba(255, 255, 255, .25) 2px, rgba(0, 0, 0, 0) 2px);
+  background-position: 0px 1px;
+  background-repeat: repeat;
+  background-size: 20px 20px;
+}
+
+body {
+  background: url(http://www.transparenttextures.com/patterns/handmade-paper.png);
+  opacity: .75;
+}
