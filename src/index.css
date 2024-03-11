@@ -1,0 +1,36 @@
+:root {
+  --dark-blue-background: #daeaf1;
+  --light-gray-background: #d7d1d1;
+  --dark-gray-background: #7d7878;
+  --black-background: #2c2b2b;
+  --text-dark: #1B1B1B;
+  --red-background: #cf1411;
+  --light-red-background: #f4cfcf;
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
