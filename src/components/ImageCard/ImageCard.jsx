@@ -1,10 +1,12 @@
 import css from './ImageCard.module.css';
 
-const ImageCard = () => {
+const ImageCard = ({ photo }) => {
   return (
     <div className={css.container}>
-
-    </div>
+    <img src={photo.urls.small} alt={photo.alt_description} width={250}/>
+    <p>{photo.user.name}</p>
+    <p>Likes: {photo.likes}</p>
+  </div>
   )
 }
 
