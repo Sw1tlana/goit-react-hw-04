@@ -6,41 +6,55 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ImageModal from './components/ImageModal/ImageModal';
 import "modern-normalize";
 import css from './App.module.css';
-import axios from "axios";
 import { useEffect, useState } from 'react';
-
-const ACCESS_KEY = "Y8OVY-DAIGWWhP7Nmp122SVKSdogm4qGsG1ERWLS_D0"
+import toast from 'react-hot-toast';
+import { requestPhoto } from './services/api';
 
 function App() {
    const [photos, setPhotos] = useState(null);
    const [isLoading, setIsLoading] = useState(false);
    const [isError, setIsError] = useState(false);
+   const [searchQuery, setSearchQuery] = useState("");
+   const notify = () => toast('Here is your toast.');
+
+  const onSearchQuery = (query) => {
+    setSearchQuery(query);
+  }
 
   useEffect(() => { 
     
       async function fetchData () {
+
       try {
         setIsLoading(true);   
         setIsError(false);    
-        const { data } = await axios.get(`https://api.unsplash.com/photos/?client_id=${ACCESS_KEY}`);       
+        const data = await requestPhoto(searchQuery);
         setPhotos(data);
+        console.log(data);
+         
     } catch(error) {
       setIsError(true)
+
     } finally {
       setIsLoading(false); 
     }
     }
-    fetchData();
-  }, [])
+
+    if (searchQuery !== '') {
+      fetchData();
+    } else {
+      notify();
+    }
+  }, [searchQuery]);
  
   return (
     <div className={css.container}>
-      <LoadMoreBtn/>
-      <SearchBar/>
-      <ImageGallery photos={photos}/>
-      <Loader isLoading={isLoading}/>
-      <ErrorMessage isError={isError}/>
-      <ImageModal/>
+    <SearchBar onSubmit={onSearchQuery}/>
+    <ImageGallery photos={photos}/>
+    {isLoading && <Loader/>}
+    {isError && <ErrorMessage/>}
+    <LoadMoreBtn/>
+    <ImageModal/>
     </div>
   )
 }
