@@ -36,8 +36,9 @@ function App() {
      try {
       setIsLoading(true);   
        setIsError(false); 
-        const data = await requestPhoto();
-         setPhotos(data)
+        const data = await requestPhoto(searchQuery, 1);
+         setPhotos(data);
+         setPage(2);
 
       } catch(error) {
         setIsError(true)
@@ -47,7 +48,7 @@ function App() {
       }
     }      
         fetchPhotos();
-    }, []);
+    }, [searchQuery]);
 
 
     const onSearchQuery = (query) => {
