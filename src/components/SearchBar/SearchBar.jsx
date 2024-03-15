@@ -11,6 +11,7 @@ const SearchBar = ({ onSubmit }) => {
     } else {
       toast.error('Please enter a search query!');
     }
+    form.reset();
   }
 
   return (

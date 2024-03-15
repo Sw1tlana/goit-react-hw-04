@@ -16,15 +16,16 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [searchQuery, setSearchQuery] = useState(null);
+  const [page, setPage] = useState(1);
 
   useEffect(() => { 
     async function fetchFotos() {
-      
+
       try {
         setIsLoading(true);
         setIsError(false);
         const data = await requestPhotos();
-        setPhotos(data.photos);
+        setPhotos(data);
 
       } catch (error) {
         setIsError(true);
@@ -37,20 +38,20 @@ function App() {
   }, [])
 
  const onSearchQuery = (query) => {
-    setSearchQuery(query);
+   setSearchQuery(query);
+   setPage(1);
  };
 
   useEffect(() => {
     if (searchQuery === null) return;
-
-  async function fetchFotosByQuery() {
+    async function fetchFotosByQuery() {
       
       try {
         setIsLoading(true);
         setIsError(false);
         const data = await requestPhotosByQuery(searchQuery);
         setPhotos(data);
-
+ 
       } catch (error) {
         setIsError(true);
       } finally {
@@ -59,17 +60,32 @@ function App() {
     }
 
     fetchFotosByQuery();
-
   }, [searchQuery]);
+
+    const loadMorePhotos = async () => {
+    try {
+      setIsLoading(true);
+      const nextPage = page + 1; 
+      const newData = searchQuery ?
+        await requestPhotosByQuery(searchQuery, nextPage) :
+        await requestPhotos(nextPage);
+      setPhotos([...photos, ...newData]);
+      setPage(nextPage); 
+    } catch (error) {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className={css.container}>
     <SearchBar onSubmit={onSearchQuery} /> 
     <Toaster />
-    <ImageGallery photos={photos} />
+    <ImageGallery photos={photos}/>
     {isLoading && <Loader/>} 
     {isError && <ErrorMessage/>}
-    {photos && photos.length > 0 && <LoadMoreBtn />} 
+    {photos && photos.length > 0 && <LoadMoreBtn onClick={loadMorePhotos}/>} 
      <ImageModal/>
     </div>
   )
