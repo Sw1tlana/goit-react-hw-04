@@ -1,5 +1,6 @@
 import toast from 'react-hot-toast';
 import css from './SearchBar.module.css';
+import { BsSearch } from "react-icons/bs";
 
 const SearchBar = ({ onSubmit }) => {
   const handleSubmit = (evt) => {
@@ -16,7 +17,8 @@ const SearchBar = ({ onSubmit }) => {
 
   return (
   <header className={css.header}>
-  <form onSubmit={handleSubmit} className={css.form}>
+    <form onSubmit={handleSubmit} className={css.form}>
+      <div className={css.inputContainer}>
       <input
       className={css.inputSearch}
       type="text"
@@ -24,8 +26,9 @@ const SearchBar = ({ onSubmit }) => {
       autoComplete="off"
       autoFocus
       placeholder="Search images and photos"
-    />
-    <button className={css.formBtn} type="submit">Search</button>
+          />
+          <button className={css.searchButton} type="submit"><BsSearch /></button>
+      </div>
   </form>
 </header>
   )

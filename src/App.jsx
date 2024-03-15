@@ -4,12 +4,11 @@ import ImageGallery from './components/ImageGallery/ImageGallery';
 import Loader from './components/Loader/Loader';
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage"; 
 import ImageModal from './components/ImageModal/ImageModal';
-import css from './App.module.css';
-
 import "modern-normalize";
+import css from './App.module.css';
 import { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
-import { requestPhotos, requestPhotosByQuery } from './services/api';
+import { requestPhotosByQuery } from './services/api';
 
 function App() {
   const [photos, setPhotos] = useState(null);
@@ -17,25 +16,7 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [searchQuery, setSearchQuery] = useState(null);
   const [page, setPage] = useState(1);
-
-  useEffect(() => { 
-    async function fetchFotos() {
-
-      try {
-        setIsLoading(true);
-        setIsError(false);
-        const data = await requestPhotos();
-        setPhotos(data);
-
-      } catch (error) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchFotos()
-  }, [])
+  const [modalImageUrl, setModalImageUrl] = useState(null);
 
  const onSearchQuery = (query) => {
    setSearchQuery(query);
@@ -43,15 +24,13 @@ function App() {
  };
 
   useEffect(() => {
-    if (searchQuery === null) return;
+    if (searchQuery === null) return;   
     async function fetchFotosByQuery() {
-      
-      try {
+        try {
         setIsLoading(true);
         setIsError(false);
         const data = await requestPhotosByQuery(searchQuery);
         setPhotos(data);
- 
       } catch (error) {
         setIsError(true);
       } finally {
@@ -68,8 +47,8 @@ function App() {
       const nextPage = page + 1; 
       const newData = searchQuery ?
         await requestPhotosByQuery(searchQuery, nextPage) :
-        await requestPhotos(nextPage);
-      setPhotos([...photos, ...newData]);
+        await requestPhotosByQuery(nextPage);
+        setPhotos(prevPhotos => [...prevPhotos, ...newData]); 
       setPage(nextPage); 
     } catch (error) {
       setIsError(true);
@@ -77,16 +56,24 @@ function App() {
       setIsLoading(false);
     }
   };
+ 
+  const openModalWithImage = (imageUrl) => {
+    setModalImageUrl(imageUrl); 
+  };
+
+  const closeModal = () => {
+    setModalImageUrl(null); 
+  };
 
   return (
     <div className={css.container}>
     <SearchBar onSubmit={onSearchQuery} /> 
     <Toaster />
-    <ImageGallery photos={photos}/>
+    <ImageGallery photos={photos} onImageClick={openModalWithImage}/>
     {isLoading && <Loader/>} 
     {isError && <ErrorMessage/>}
     {photos && photos.length > 0 && <LoadMoreBtn onClick={loadMorePhotos}/>} 
-     <ImageModal/>
+    {modalImageUrl && <ImageModal imageUrl={modalImageUrl} closeModal={closeModal} />}
     </div>
   )
 }

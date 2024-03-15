@@ -1,0 +1,28 @@
+.containerLoadMore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.loadMoreBtn {
+    border: 2px solid var(--light-gray-background);
+    background-color: var(--blue-background);
+    color: var(--light-background);
+    border-radius:8px;
+    font-size: 14px;
+    font-family: inherit;
+    width: 100px;
+    height: 40px;
+    animation: scaleAnimation 3s infinite alternate;
+}
+
+@keyframes scaleAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}

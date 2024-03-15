@@ -1,24 +1,33 @@
 .header {
 padding: 20px 0;
+background-color: var(--blue-background);
 }
 
 .form {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+}
+
+.inputContainer {
+    position: relative;
+    display: inline-block;
 }
 
 .inputSearch {
-    padding: 8px 16px;
+    position: relative;
+    padding: 8px 40px 8px 16px;
     border-radius: 6px;
     font-family: inherit;
-    max-width: 300px;
     width: 100%;
 }
 
-.formBtn {
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-family: inherit;
+.searchButton {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
