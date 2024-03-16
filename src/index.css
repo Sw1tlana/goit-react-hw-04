@@ -1,7 +1,7 @@
 :root {
-  --light-background: #f5f9fb;
+  --light-background: #ffffff;
   --light-gray-background: #d7d1d1;
-  --dark-gray-background: #7d7878;
+  --ligth-blue-background: #0abdd4;
   --black-background: #2c2b2b;
   --text-dark: #1B1B1B;
   --blue-background: #4043ec;
@@ -32,5 +32,7 @@ ol {
 
 img {
   display: block;
-  max-width: 100%;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }

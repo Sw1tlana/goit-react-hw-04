@@ -6,6 +6,7 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ImageModal from './components/ImageModal/ImageModal';
 import "modern-normalize";
 import css from './App.module.css';
+
 import { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { requestPhotosByQuery } from './services/api';

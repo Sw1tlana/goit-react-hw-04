@@ -1,6 +1,13 @@
 .listPhotos {
- display: flex;
- flex-wrap: wrap;
- gap: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 14px;
 }
 
+.listItemPhoto {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}

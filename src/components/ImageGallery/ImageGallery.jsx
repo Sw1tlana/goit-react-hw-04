@@ -3,7 +3,7 @@ import ImageCard from '../ImageCard/ImageCard';
 
 const ImageGallery = ({ photos, onImageClick }) => {
   return (
-    <div className={css.container}>
+    <div>
       <ul className={css.listPhotos}>{photos !== null && Array.isArray(photos) && photos.map((photo) => {
         return <li className={css.listItemPhoto} key={photo.id}  onClick={() => onImageClick(photo.urls.small)}>
           <ImageCard photo={photo} onClick={onImageClick} />
