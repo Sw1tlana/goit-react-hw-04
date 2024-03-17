@@ -40,7 +40,7 @@ const handleKeyDown = (event) => {
       contentLabel="Image Modal"
     >
       <div className={css.modalContainer}>
-        <img src={imageUrl} alt="modal" className={css.image} />
+        <img src={imageUrl} alt="modal"/>
       </div>
     </Modal>
   );
